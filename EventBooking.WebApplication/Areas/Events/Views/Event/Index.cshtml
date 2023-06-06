@@ -1,0 +1,82 @@
+﻿@model List<BEventDTO>
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Event List
+            </h2>
+
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Event" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-square"></i>Create New Event
+            </a>
+
+
+        </div>
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+
+                <th>
+                    Event Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+                    Available seats
+                </th>
+                <th>
+                    Event Status
+                </th>
+
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td>@obj.eventName</td>
+                    <td>@obj.eventDescription</td>
+                    <td>@obj.location</td>
+                    <td>@obj.availableSeats</td>
+                    <td>@obj.eventStatus</td>
+
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Event" asp-action="Update" asp-route-id="@obj.id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-controller="Event" asp-action="Delete" asp-route-id="@obj.id" class="btn btn-danger mx-2 ">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+
+                        </div>
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

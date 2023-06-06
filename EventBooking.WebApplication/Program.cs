@@ -1,8 +1,26 @@
+
+
 using BEventsWeb.MappingConfig;
-using BEventsWeb.Services.IServices;
 using BEventsWeb.Services;
+using BEventsWeb.Services.IServices;
+using BusinessEvents.DataAccess.Repository.IRepository;
+using BusinessEvents.DataAccess.Repository;
+using EventBooking.DataAccess.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("SQLConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
+
+/*builder.Services.AddDbContext<ApplicationDbContext>(options => 
+options.UseSqlServer(connectionString));*/
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+
+options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -13,10 +31,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IBEventService, BEventService>();
 builder.Services.AddScoped<IBEventService, BEventService>();
 
+builder.Services.AddScoped<IUnitofWork, UnitOfWork>();
 
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
-
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -32,11 +51,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

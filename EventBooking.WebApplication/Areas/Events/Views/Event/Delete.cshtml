@@ -1,0 +1,59 @@
+﻿@model BEventDTO
+
+<form method="post">
+    <div class="border p-3 mt-4">
+
+        <div class="row pb-2">
+            <h2 class=" text-primary">Delete Event</h2>
+            <hr />
+
+            <div class="mb-3" row>
+                <label asp-for="eventName"></label>
+                <input asp-for="eventName" disabled class="form-control" />
+
+            </div>
+
+            <div class="mb-3" row>
+                <label asp-for="eventDescription"></label>
+                <input asp-for="eventDescription" disabled class="form-control" />
+
+            </div>
+
+
+
+            <div class="mb-3" row>
+                <label asp-for="location"></label>
+                <input asp-for="location" disabled class="form-control" />
+
+            </div>
+
+            <div class="mb-3" row>
+                <label asp-for="eventDate"></label>
+                <input asp-for="eventDate" disabled class="form-control" />
+
+            </div>
+
+            <div class="mb-3" row>
+                <label asp-for="availableSeats"></label>
+                <input asp-for="availableSeats" disabled class="form-control" />
+
+            </div>
+
+
+        </div>
+        <div class="row">
+
+            <div class="col-6 col-md-3">
+
+                <button type="submit" class="btn btn-danger form-control">Delete</button>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <a asp-controller="Event" asp-action="Index" class="btn btn-outline-secondary form-control"> Back To List</a>
+            </div>
+
+        </div>
+
+
+    </div>
+</form>
