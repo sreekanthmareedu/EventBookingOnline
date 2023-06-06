@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
 using BEventsWeb.Models;
 using BEventsWeb.Services.IServices;
+using BusinessEvents.DataAccess;
 using BusinessEventsAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace EventBooking.WebApplication.Areas.Customer.Controllers
 {
     [Area("Customer")]
+    [Authorize(Roles = SD.Role_Customer)]
     public class HomeController : Controller
     {
         private readonly IBEventService _eventService;
@@ -33,6 +37,11 @@ namespace EventBooking.WebApplication.Areas.Customer.Controllers
 
             return View(List);
 
+        }
+
+        public async Task<IActionResult> Home()
+        {
+            return View();
         }
 
     }

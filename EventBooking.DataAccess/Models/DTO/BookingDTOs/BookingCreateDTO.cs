@@ -11,28 +11,20 @@ using System.Threading.Tasks;
 
 namespace BusinessEvents.DataAccess.Models
 {
-    public class Booking
+    public class BookingCreateDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int BookingId { get; set; }
+        
+        
 
         public int TotalSeatsBooked { get; set; }    
 
 
         public int EventId { get; set; }
 
-        [ForeignKey("EventId")]
-        [ValidateNever]
-        public BEvent BEvent { get; set; }
-
-
+      
         public string UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        [ValidateNever]
-        public IdentityUser IdentityUser { get; set; }  
-
+  
 
 
     }

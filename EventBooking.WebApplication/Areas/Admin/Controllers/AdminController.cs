@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using BEventsWeb.Models;
 using BEventsWeb.Services.IServices;
+using BusinessEvents.DataAccess;
 using BusinessEventsAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace EventBooking.WebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class AdminController : Controller
     {
         private readonly IBEventService _eventService;

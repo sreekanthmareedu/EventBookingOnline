@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BusinessEvents.DataAccess;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,12 +20,29 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                         @if (User.IsInRole(SD.Role_Customer)) {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        
+                         }
+                        @if (User.IsInRole(SD.Role_Admin)) {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Admin" asp-action="Index">Pending Events</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(SD.Role_Employee)){
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="Events" asp-controller="Event" asp-action="Index">Event Management</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        }
+                       
                     </ul>
 
                     <partial name="_LoginPartial" />

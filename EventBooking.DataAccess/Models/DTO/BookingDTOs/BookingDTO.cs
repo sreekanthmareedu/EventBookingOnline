@@ -11,10 +11,9 @@ using System.Threading.Tasks;
 
 namespace BusinessEvents.DataAccess.Models
 {
-    public class Booking
+    public class BookingDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int BookingId { get; set; }
 
         public int TotalSeatsBooked { get; set; }    

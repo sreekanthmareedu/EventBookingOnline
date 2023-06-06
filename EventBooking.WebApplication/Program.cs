@@ -9,6 +9,8 @@ using EventBooking.DataAccess.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using EventBooking.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("SQLConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
@@ -20,7 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -30,6 +32,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IBEventService, BEventService>();
 builder.Services.AddScoped<IBEventService, BEventService>();
+builder.Services.AddScoped<IEmailSender,EmailSender>();
 
 builder.Services.AddScoped<IUnitofWork, UnitOfWork>();
 
@@ -56,6 +59,6 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Customer}/{controller=Home}/{action=Home}/{id?}");
 
 app.Run();

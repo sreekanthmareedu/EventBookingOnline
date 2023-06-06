@@ -3,6 +3,8 @@ using BusinessEvents.DataAccess.Repository;
 using EventBooking.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using BusinessEventsAPI.MappingConfig;
+using EventBooking.DataAccess.Repository.IRepository;
+using EventBooking.DataAccess.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,7 @@ builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 builder.Services.AddScoped<IBEventRepository, BEventRepository>();
 builder.Services.AddScoped<IUnitofWork, UnitOfWork>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
 
 

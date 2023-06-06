@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessEvents.DataAccess.Models;
 using BusinessEventsAPI.Models;
 
 namespace BusinessEventsAPI.MappingConfig
@@ -10,6 +11,11 @@ namespace BusinessEventsAPI.MappingConfig
             CreateMap<BEventDTO, BEvent>().ReverseMap();
             CreateMap<BEvent, BEventUpdateDTO>().ReverseMap();
             CreateMap<BEvent, BEventCreateDTO>().ReverseMap();
+
+
+            CreateMap<BookingDTO, Booking>().ReverseMap();
+            CreateMap<Booking, BookingUpdateDTO>().ReverseMap();
+            CreateMap<Booking, BookingCreateDTO>().ReverseMap();
 
 
         }

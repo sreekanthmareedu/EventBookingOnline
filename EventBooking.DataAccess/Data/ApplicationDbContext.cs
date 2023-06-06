@@ -1,4 +1,5 @@
-﻿using BusinessEventsAPI.Models;
+﻿using BusinessEvents.DataAccess.Models;
+using BusinessEventsAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,8 @@ namespace EventBooking.DataAccess.Data
 
 
         DbSet<BEvent> BEvents { get; set; }
+
+        DbSet<Booking> Bookings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

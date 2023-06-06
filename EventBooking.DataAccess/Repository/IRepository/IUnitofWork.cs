@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventBooking.DataAccess.Repository.IRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace BusinessEvents.DataAccess.Repository.IRepository
     {
        public IBEventRepository BEvent { get; }
 
-      
+      public IBookingRepository Booking { get; }
         void Save();
 
 
