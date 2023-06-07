@@ -59,17 +59,29 @@ namespace EventBooking.WebApplication.Areas.Customer.Controllers
 //==================================================== My Bookings ====================================================================================================
 public async Task<IActionResult> AllBookings()
         {
-           // var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //IEnumerable<BookingDTO> List;
             List<BookingDTO> List = new();
+            List<BEventDTO> evntList = new();
+            //BookingVM booking = new();
             var response = await _bookingService.GetBookingAsync<APIResponse>();
             if (response != null && response.IsSuccess)
             {
                 List = JsonConvert.DeserializeObject<List<BookingDTO>>(Convert.ToString(response.Results));
             }
-           // var evnt = await _eventService.
+            //List.
+            // booking.booking = mapper.Map<BookingDTO>(List);
+            var evnt = await _eventService.GetBEventsAsync<APIResponse>();
+          
+            if (evnt != null && evnt.IsSuccess)
+            {
+                evntList = JsonConvert.DeserializeObject<List<BEventDTO>>(Convert.ToString(response.Results));
+            }
+            ViewBag.evntList = evntList;
+
+            ViewBag.UserId = userId;
             return View(List);
 
-            
         }
 
 

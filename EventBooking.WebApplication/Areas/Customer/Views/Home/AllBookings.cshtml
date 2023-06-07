@@ -18,20 +18,15 @@
             <tr>
 
                 <th>
-                    Event Name
+                   Booking Id
                 </th>
                 <th>
-                    Description
+                   Event Id
                 </th>
                 <th>
-                    Location
+                    Seats Booked
                 </th>
-                <th>
-                    Available seats
-                </th>
-                <th>
-                    Event Status
-                </th>
+                
 
                 <th>
 
@@ -41,19 +36,21 @@
         <tbody>
             @foreach (var obj in Model)
             {
-                <tr>
-                    <td>@obj.BookingId</td>
-                    <td>@obj.eventDescription</td>
-                    <td>@obj.location</td>
-                    <td>@obj.availableSeats</td>
-                    <td>@obj.eventStatus</td>
+                @if (obj.UserId == ViewBag.UserId)
+                {
+                    <tr>
+                        <td>@obj.BookingId</td>
+                    <td>@obj.EventId</td>
+                    <td>@obj.TotalSeatsBooked</td>
+                    @*<td>@obj.availableSeats</td>
+                    <td>@obj.eventStatus</td>*@
 
                     <td>
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Event" asp-action="Update" asp-route-id="@obj.id" class="btn btn-primary mx-2">
+                            <a asp-controller="Event" asp-action="Update" asp-route-id="@obj.BookingId" class="btn btn-primary mx-2">
                                 <i class="bi bi-pencil-square"></i> Edit
                             </a>
-                            <a asp-controller="Event" asp-action="Delete" asp-route-id="@obj.id" class="btn btn-danger mx-2 ">
+                            <a asp-controller="Event" asp-action="Delete" asp-route-id="@obj.BookingId" class="btn btn-danger mx-2 ">
                                 <i class="bi bi-trash"></i> Delete
                             </a>
 
@@ -62,6 +59,7 @@
 
 
                 </tr>
+                }
             }
         </tbody>
 
