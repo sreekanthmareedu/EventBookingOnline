@@ -113,6 +113,9 @@ namespace EventBooking.Controllers
 
                 }
 
+
+
+
                 var evntinfo = await _unitOfWork.BEvent.GetAsync(u => u.id == dto.EventId);
                 if (evntinfo == null || (evntinfo.availableSeats < dto.TotalSeatsBooked))
                 {

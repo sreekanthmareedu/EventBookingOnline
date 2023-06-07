@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace EventBooking.WebApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
+   // [Authorize(Roles = SD.Role_Admin)]
     public class AdminController : Controller
     {
         private readonly IBEventService _eventService;

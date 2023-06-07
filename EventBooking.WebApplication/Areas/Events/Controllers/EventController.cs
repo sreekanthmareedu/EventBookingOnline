@@ -2,7 +2,9 @@
 using BEventsWeb.Models;
 using BEventsWeb.Services.IServices;
 using BusinessEvents.DataAccess;
+using BusinessEvents.DataAccess.Models;
 using BusinessEventsAPI.Models;
+using EventBooking.DataAccess.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -11,7 +13,7 @@ using System.Data;
 namespace EventBooking.WebApplication.Areas.Events.Controllers
 {
     [Area("Events")]
-    [Authorize(Roles = SD.Role_Employee)]
+   // [Authorize(Roles = SD.Role_Employee)]
     public class EventController : Controller
     {
         private readonly IBEventService _eventService;
@@ -27,11 +29,14 @@ namespace EventBooking.WebApplication.Areas.Events.Controllers
         public async Task<IActionResult> Index()
         {
             List<BEventDTO> List = new();
-            var response = await _eventService.GetBEventsAsync<APIResponse>();
+           
+            var response = await  _eventService.GetBEventsAsync<APIResponse>();
             if (response != null && response.IsSuccess)
             {
                 List = JsonConvert.DeserializeObject<List<BEventDTO>>(Convert.ToString(response.Results));
             }
+
+
             return View(List);
 
         }

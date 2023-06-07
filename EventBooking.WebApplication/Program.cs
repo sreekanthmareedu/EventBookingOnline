@@ -32,6 +32,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IBEventService, BEventService>();
 builder.Services.AddScoped<IBEventService, BEventService>();
+builder.Services.AddScoped<IBookingService,BookingService>();
 builder.Services.AddScoped<IEmailSender,EmailSender>();
 
 builder.Services.AddScoped<IUnitofWork, UnitOfWork>();

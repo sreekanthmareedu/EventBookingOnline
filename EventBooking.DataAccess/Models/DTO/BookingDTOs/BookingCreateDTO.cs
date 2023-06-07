@@ -15,7 +15,7 @@ namespace BusinessEvents.DataAccess.Models
     {
         
         
-
+        required
         public int TotalSeatsBooked { get; set; }    
 
 
