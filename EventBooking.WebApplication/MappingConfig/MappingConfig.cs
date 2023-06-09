@@ -16,8 +16,8 @@ namespace BEventsWeb.MappingConfig
 
 
             CreateMap<BookingDTO, Booking>().ReverseMap();
-            CreateMap<Booking, BookingUpdateDTO>().ReverseMap();
-            CreateMap<Booking, BookingCreateDTO>().ReverseMap();
+            CreateMap<BookingDTO, BookingUpdateDTO>().ReverseMap();
+            CreateMap<BookingDTO, BookingCreateDTO>().ReverseMap();
 
 
         }

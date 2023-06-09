@@ -14,9 +14,9 @@ namespace EventBooking.DataAccess.ViewModels
 
      
 
-        public IEnumerable<BookingDTO> booking { get; set; }
+        public BookingDTO bookingVM { get; set; }
 
-        public IEnumerable<BEventDTO> bEvents { get; set; }
+        public BEventDTO bEventsVM { get; set; }
         
 
 

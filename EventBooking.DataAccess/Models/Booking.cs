@@ -10,7 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessEvents.DataAccess.Models
+//namespace BusinessEvents.DataAccess.Models
+
+namespace BusinessEventsAPI.Models
 {
     public class Booking
     {

@@ -117,6 +117,13 @@ namespace EventBooking.Controllers
 
 
                 var evntinfo = await _unitOfWork.BEvent.GetAsync(u => u.id == dto.EventId);
+                if (evntinfo == null)
+                {
+                    ModelState.AddModelError("Custom Error", "Invalid event Details");
+                    return BadRequest(ModelState);
+
+                }
+
                 if (evntinfo == null || (evntinfo.availableSeats < dto.TotalSeatsBooked))
                 {
                     ModelState.AddModelError("Custom Error", "Insufficient Seats");
@@ -234,7 +241,7 @@ namespace EventBooking.Controllers
                 }
 
 
-                Booking bookingInfo = await _unitOfWork.Booking.GetAsync(u => u.BookingId== id);
+                Booking bookingInfo = await _unitOfWork.Booking.GetAsync(u => u.BookingId == id);
                 if (bookingInfo.TotalSeatsBooked > dto.TotalSeatsBooked)
                 {
 
@@ -249,10 +256,10 @@ namespace EventBooking.Controllers
                     }
 
 
-                    
+                    var finalseats = bookingInfo.TotalSeatsBooked - dto.TotalSeatsBooked;
                   
 
-                    int UAvailableSeats = evntinfo.availableSeats - dto.TotalSeatsBooked;
+                    int UAvailableSeats = evntinfo.availableSeats + finalseats;
 
                     evntinfo.availableSeats = UAvailableSeats;
 
@@ -266,7 +273,9 @@ namespace EventBooking.Controllers
                 {
                      var evntinfo = await _unitOfWork.BEvent.GetAsync(u => u.id == dto.EventId);
 
-                    int UAvailableSeats = evntinfo.availableSeats + dto.TotalSeatsBooked;
+                    var finalseats =   dto.TotalSeatsBooked - bookingInfo.TotalSeatsBooked;
+
+                    int UAvailableSeats = evntinfo.availableSeats - finalseats;
 
                     evntinfo.availableSeats = UAvailableSeats;
 
